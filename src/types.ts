@@ -20,3 +20,7 @@ export type ExpansionInitialState = {
   expansions: Expansion[];
   currentExpansion: Expansion;
 };
+
+export type ExpansionParams = {
+  name: string;
+};
