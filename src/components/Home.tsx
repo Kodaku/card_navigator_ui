@@ -12,8 +12,6 @@ const Home = () => {
     (state) => state.expansions.expansions
   );
 
-  const tableHeads = ["Expansion Name", "URL"];
-
   useEffect(() => {
     dispatch(fetchExpansions());
   }, [dispatch]);
