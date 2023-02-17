@@ -20,21 +20,69 @@ const Home = () => {
 
   // console.log(expansions);
 
-  const displayExpansions = () => {
-    return expansions.map((expansion) => (
-      <tr key={expansion.expansion_full_name}>
-        <td>
+  const displayExpansionRow = (index: number) => {
+    return (
+      <div className="row">
+        <div className="col-md-3">
           <Link
-            to={`/expansions/details/${expansion.expansion_full_name}`}
+            to={`/expansions/details/${expansions[index].expansion_full_name}`}
             type="button"
             className="btn btn-info"
           >
-            {expansion.expansion_full_name}
+            {expansions[index].expansion_full_name}
           </Link>
-        </td>
-        <td>{expansion.expansion_url}</td>
-      </tr>
-    ));
+        </div>
+        {index + 1 < expansions.length ? (
+          <div className="col-md-3">
+            <Link
+              to={`/expansions/details/${
+                expansions[index + 1].expansion_full_name
+              }`}
+              type="button"
+              className="btn btn-info"
+            >
+              {expansions[index + 1].expansion_full_name}
+            </Link>
+          </div>
+        ) : null}
+        {index + 2 < expansions.length ? (
+          <div className="col-md-3">
+            <Link
+              to={`/expansions/details/${
+                expansions[index + 2].expansion_full_name
+              }`}
+              type="button"
+              className="btn btn-info"
+            >
+              {expansions[index + 2].expansion_full_name}
+            </Link>
+          </div>
+        ) : null}
+        {index + 3 < expansions.length ? (
+          <div className="col-md-3">
+            <Link
+              to={`/expansions/details/${
+                expansions[index + 3].expansion_full_name
+              }`}
+              type="button"
+              className="btn btn-info"
+            >
+              {expansions[index + 3].expansion_full_name}
+            </Link>
+          </div>
+        ) : null}
+      </div>
+    );
+  };
+
+  const displayExpansions = () => {
+    const allRows = [];
+    for (let i = 0; i < expansions.length; i++) {
+      if (i % 4 === 0) {
+        allRows.push(displayExpansionRow(i));
+      }
+    }
+    return allRows.map((row) => <div className="card-body">{row}</div>);
   };
 
   return (
@@ -55,20 +103,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="card-body">
-              <div className="table-responsive">
-                <table className="table table-striped">
-                  <thead>
-                    <tr>
-                      {tableHeads.map((tableHead) => (
-                        <th key={tableHead}>{tableHead}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>{displayExpansions()}</tbody>
-                </table>
-              </div>
-            </div>
+            <div className="card-body">{displayExpansions()}</div>
           </div>
           <Footer />
         </div>
