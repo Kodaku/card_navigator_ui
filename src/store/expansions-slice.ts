@@ -6,6 +6,7 @@ const initialState: ExpansionInitialState = {
     card_types: [],
     expansion_full_name: "",
     expansion_url: "",
+    year: "",
   },
   expansions: [],
 };

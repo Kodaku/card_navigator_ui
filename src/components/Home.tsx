@@ -5,6 +5,7 @@ import Sidebar from "./UI/Sidebar";
 import { useEffect } from "react";
 import { fetchExpansions } from "../store/expansions-actions";
 import { Link } from "react-router-dom";
+import { YEARS } from "../constants";
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +19,7 @@ const Home = () => {
 
   // console.log(expansions);
 
-  const displayExpansionRow = (index: number) => {
+  const displayExpansionRow = (expansions: Expansion[], index: number) => {
     return (
       <div className="row">
         <div className="col-md-3">
@@ -75,9 +76,15 @@ const Home = () => {
 
   const displayExpansions = () => {
     const allRows = [];
-    for (let i = 0; i < expansions.length; i++) {
-      if (i % 4 === 0) {
-        allRows.push(displayExpansionRow(i));
+    for (let i = 0; i < YEARS.length; i++) {
+      const expansions_of_year = expansions.filter(
+        (expansion) => expansion.year === YEARS[i]
+      );
+      allRows.push(<h1>{YEARS[i]}</h1>);
+      for (let j = 0; j < expansions_of_year.length; j++) {
+        if (j % 4 === 0) {
+          allRows.push(displayExpansionRow(expansions_of_year, j));
+        }
       }
     }
     return allRows.map((row) => <div className="card-body">{row}</div>);

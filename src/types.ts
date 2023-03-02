@@ -20,6 +20,7 @@ export type Expansion = {
   expansion_url: string;
   expansion_full_name: string;
   card_types: CardType[];
+  year: string;
 };
 
 export type ExpansionInitialState = {
